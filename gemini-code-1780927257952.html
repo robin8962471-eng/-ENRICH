@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣財務管理推廣學會 - 官方網站</title>
+    <style>
+        :root {
+            --primary-color: #0A3C36;
+            --gold-color: #D4AF37;
+            --text-dark: #2D3748;
+            --bg-light: #f4f6f9;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            margin: 0; padding: 0;
+            background-color: #ffffff;
+            color: var(--text-dark);
+        }
+
+        /* 頂級毛玻璃質感導覽列 */
+        header { 
+            background-color: rgba(255, 255, 255, 0.94); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 12px 20px; }
+        
+        /* Logo 容器 */
+        .logo-container { height: 56px; display: flex; align-items: center; text-decoration: none; transition: transform 0.2s; }
+        .logo-container:hover { transform: scale(1.02); }
+        
+        .nav-links { list-style: none; display: flex; gap: 30px; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 15px; letter-spacing: 1px; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -6px; left: 0; background-color: var(--gold-color); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        
+        .hero { background: linear-gradient(rgba(10, 60, 54, 0.85), rgba(22, 91, 81, 0.85)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover; color: white; text-align: center; padding: 80px 20px; }
+        .hero h1 { margin: 0 0 10px 0; font-size: 32px; }
+        .hero p { margin: 0; font-size: 18px; letter-spacing: 2px; }
+
+        /* 理事長的話區塊（無照片純文字優化版） */
+        .president-section { padding: 80px 20px; max-width: 900px; margin: 0 auto; scroll-margin-top: 80px; }
+        .president-container { display: flex; gap: 40px; align-items: flex-start; }
+        
+        /* 左側職稱標籤大氣化 */
+        .president-badge { flex: 0 0 180px; background-color: var(--primary-color); border-left: 5px solid var(--gold-color); padding: 20px 15px; border-radius: 0 8px 8px 0; box-shadow: 0 4px 12px rgba(10, 60, 54, 0.1); }
+        .president-title { font-size: 18px; color: #FFFFFF; font-weight: bold; letter-spacing: 2px; line-height: 1.5; }
+        .president-subtitle { font-size: 13px; color: var(--gold-color); margin-top: 5px; font-weight: bold; }
+        
+        .president-content { flex: 1; }
+        .president-content h2 { font-size: 26px; color: var(--primary-color); margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid var(--gold-color); padding-bottom: 10px; }
+        .president-content p { font-size: 16px; line-height: 1.8; color: #4A5568; margin-bottom: 15px; text-align: justify; }
+        .president-sign { text-align: right; font-weight: bold; font-size: 18px; color: var(--primary-color); margin-top: 25px; }
+
+        .org-section { background-color: var(--bg-light); padding: 80px 20px; }
+        .org-section-title { text-align: center; font-size: 26px; color: var(--primary-color); margin-top: 0; margin-bottom: 40px; font-weight: bold; }
+        .org-wrapper { max-width: 1100px; margin: 0 auto; background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); overflow-x: auto; }
+        .svg-container { width: 100%; min-width: 980px; display: block; }
+
+        .join-section { padding: 80px 20px; max-width: 900px; margin: 0 auto; scroll-margin-top: 80px; }
+        .member-type-title { font-size: 24px; font-weight: bold; color: var(--primary-color); margin-bottom: 30px; border-left: 5px solid var(--gold-color); padding-left: 15px; }
+        
+        .member-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+        .member-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 30px; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: transform 0.3s, box-shadow 0.3s; }
+        .member-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .member-card h3 { color: var(--primary-color); margin-top: 0; font-size: 22px; }
+        .member-card .price { font-size: 16px; color: #4A5568; margin: 20px 0 30px; line-height: 1.8; }
+        
+        .btn-apply { display: inline-block; background-color: #165B51; color: white; text-decoration: none; padding: 12px 35px; border-radius: 25px; font-weight: bold; transition: background 0.3s; }
+        .btn-apply:hover { background-color: #0A3C36; }
+
+        footer { background-color: #555555; color: #e2e8f0; text-align: center; padding: 30px 20px; font-size: 14px; line-height: 2; }
+        footer a { color: #ffffff; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.5); }
+        footer a:hover { color: var(--gold-color); }
+
+        @media (max-width: 768px) {
+            .president-container { flex-direction: column; gap: 25px; }
+            .president-badge { flex: 0 0 auto; width: 100%; box-sizing: border-box; border-radius: 8px; }
+            .member-grid { grid-template-columns: 1fr; }
+            .navbar { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" style="height: 100%; width: auto;">
+                    <defs>
+                        <linearGradient id="shieldGold" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#A57922" />
+                            <stop offset="50%" stop-color="#FCEE9B" />
+                            <stop offset="100%" stop-color="#D4AF37" />
+                        </linearGradient>
+                        <linearGradient id="shieldEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#165B51" />
+                            <stop offset="100%" stop-color="#052522" />
+                        </linearGradient>
+                        <filter id="logoShadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="1" dy="3" stdDeviation="4" flood-color="#0A3C36" flood-opacity="0.15" />
+                        </filter>
+                    </defs>
+                    <g transform="translate(15, 10)" filter="url(#logoShadow)">
+                        <path d="M 60,15 C 90,15 105,30 105,65 C 105,105 60,125 60,125 C 60,125 15,105 15,65 C 15,30 30,15 60,15 Z" fill="url(#shieldEmerald)" />
+                        <path d="M 60,23 C 84,23 96,35 96,65 C 96,97 60,114 60,114 C 60,114 24,97 24,65 C 24,35 36,23 60,23 Z" fill="#062E29" />
+                        <path d="M 60,35 L 65,65 L 60,95 L 55,65 Z" fill="url(#shieldGold)" />
+                        <path d="M 30,65 L 60,60 L 90,65 L 60,70 Z" fill="url(#shieldGold)" />
+                        <circle cx="60" cy="65" r="4" fill="#FFFFFF" />
+                    </g>
+                    <g transform="translate(145, 0)">
+                        <text x="0" y="68" font-family="'Noto Sans TC', 'STHeiti', 'Microsoft JhengHei', sans-serif" font-size="29" font-weight="900" fill="#0A3C36" letter-spacing="4">台灣財務管理推廣學會</text>
+                        <text x="2" y="96" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" fill="#A57922" letter-spacing="2.6">TAIWAN FINANCIAL MANAGEMENT PROMOTION ASSOCIATION</text>
+                        <line x1="2" y1="108" x2="435" y2="108" stroke="url(#shieldGold)" stroke-width="1" opacity="0.4" />
+                    </g>
+                </svg>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#about-us">關於我們</a></li>
+                <li><a href="#">活動訊息</a></li>
+                <li><a href="#">推廣資訊</a></li>
+                <li><a href="#join-member">會員專區</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>台灣財務管理推廣學會</h1>
+        <p>健全家庭財務安全・推廣全民財商教育</p>
+    </section>
+
+    <section class="president-section" id="about-us">
+        <div class="president-container">
+            <div class="president-badge">
+                <div class="president-title">理事長的話</div>
+                <div class="president-subtitle">Message from the President</div>
+            </div>
+            <div class="president-content">
+                <h2>Message</h2>
+                <p>親愛的會員先進、各界夥伴與朋友們，大家好！</p>
+                <p>在這個經濟環境瞬息萬變的時代，個人與家庭的財務健康，已不再只是單純的數字管理，更是決定生活品質與實現人生夢想的基石。台灣財務管理推廣學會自成立以來，便肩負著一個深刻的使命——<strong>「健全家庭財務安全，推廣全民財商教育」</strong>。</p>
+                <p>我們深信，財商（Financial Literacy）是每個人一生中必備的核心素養。然而，正確的財務觀念不該是少數人的專業特權，而應該是普及大眾的「生活通識」。從理財規劃、風險防範到資產的世代傳承，每一步都需要理性、科學且有溫度的引導。</p>
+                <p>未來，學會將透過四大核心功能小組持續深耕。這是一份責任，更是一項志業。我誠摯地邀請更多認同我們理念的專業人士與團體加入這個大家庭，無論是成為個人會員相互砥礪，或是以團體會員的身分發揮企業社會責任，我們都能匯聚成一股改變的力量，攜手為台灣構築一個更安全、更具財務韌性的社會！</p>
+                <div class="president-sign">台灣財務管理推廣學會 理事長 敬上</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="org-section">
+        <h2 class="org-section-title">學會組織架構</h2>
+        <div class="org-wrapper">
+            <div class="svg-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 580">
+                    <defs>
+                        <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+                            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.15"/>
+                        </filter>
+                    </defs>
+                    <g stroke="#718096" stroke-width="2.5" fill="none">
+                        <path d="M 512,85 L 512,135"/>
+                        <path d="M 260,135 L 744,135"/>
+                        <path d="M 260,135 L 260,155"/>
+                        <path d="M 260,200 L 260,220"/>
+                        <path d="M 744,135 L 744,155"/>
+                        <path d="M 744,200 L 744,220"/>
+                        <path d="M 744,265 L 744,285"/>
+                        <path d="M 744,330 L 744,465"/> 
+                        <path d="M 595,395 L 744,395"/> 
+                        <path d="M 744,395 L 885,395"/> 
+                        <path d="M 595,395 L 595,410"/> 
+                        <path d="M 885,395 L 885,410"/> 
+                        <path d="M 155,465 L 865,465" stroke-dasharray="5,5"/>
+                        <path d="M 155,465 L 155,485"/>
+                        <path d="M 390,465 L 390,485"/>
+                        <path d="M 625,465 L 625,485"/>
+                        <path d="M 865,465 L 865,485"/>
+                    </g>
+                    <g filter="url(#shadow)" font-weight="bold" text-anchor="middle">
+                        <rect x="362" y="25" width="300" height="60" rx="6" fill="#512688" stroke="#CAA562" stroke-width="2"/>
+                        <text x="512" y="61" fill="white" font-size="18">台灣財務管理推廣學會</text>
+                        <rect x="160" y="155" width="200" height="45" rx="6" fill="#4F81A5"/>
+                        <text x="260" y="183" fill="white">⚖️ 監事會</text>
+                        <rect x="160" y="220" width="200" height="45" rx="6" fill="#4F81A5"/>
+                        <text x="260" y="248" fill="white">👤 常務監事</text>
+                        <rect x="644" y="155" width="200" height="45" rx="6" fill="#52A46D"/>
+                        <text x="744" y="193" fill="white">👥 理事會</text>
+                        <rect x="644" y="220" width="200" height="45" rx="6" fill="#52A46D"/>
+                        <text x="744" y="248" fill="white">👤 常務理事</text>
+                        <rect x="624" y="285" width="240" height="45" rx="6" fill="white" stroke="#52A46D" stroke-width="3"/>
+                        <text x="744" y="314" fill="#2D3748" font-size="19">🔨 理 事 長</text>
+                        <rect x="520" y="410" width="150" height="40" rx="6" fill="white" stroke="#84B875" stroke-width="2"/>
+                        <text x="595" y="436" fill="#2D3748" font-size="14">⚙️ 秘書處</text>
+                        <rect x="810" y="410" width="150" height="40" rx="6" fill="white" stroke="#54A8C4" stroke-width="2"/>
+                        <text x="885" y="436" fill="#2D3748" font-size="14">👤 諮詢顧問</text>
+                        <g fill="white" font-size="15">
+                            <rect x="55" y="485" width="200" height="45" rx="6" stroke="#D97724" stroke-width="2"/>
+                            <rect x="55" y="485" width="50" height="45" rx="6" fill="#D97724"/>
+                            <text x="80" y="514">👫</text><text x="160" y="514" fill="black">活動組</text>
+                            <rect x="290" y="485" width="200" height="45" rx="6" stroke="#D4A127" stroke-width="2"/>
+                            <rect x="290" y="485" width="50" height="45" rx="6" fill="#D4A127"/>
+                            <text x="315" y="514">👨‍🏫</text><text x="395" y="514" fill="black">訓練組</text>
+                            <rect x="525" y="485" width="200" height="45" rx="6" stroke="#D34545" stroke-width="2"/>
+                            <rect x="525" y="485" width="50" height="45" rx="6" fill="#D34545"/>
+                            <text x="550" y="514">📢</text><text x="630" y="514" fill="black">公關組</text>
+                            <rect x="765" y="485" width="200" height="45" rx="6" stroke="#D64A8F" stroke-width="2"/>
+                            <rect x="765" y="485" width="50" height="45" rx="6" fill="#D64A8F"/>
+                            <text x="790" y="514">📣</text><text x="870" y="514" fill="black" font-size="14">推廣資訊組</text>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section class="join-section" id="join-member">
+        <h2 class="member-type-title">如何加入協會會員</h2>
+        <div class="member-grid">
+            <div class="member-card">
+                <h3>👤 個人會員</h3>
+                <p class="price">入會費：新臺幣 1,000 元<br>常年會費：新臺幣 5,000 元</p>
+                <a href="https://forms.gle/df8Nay6kNdjiEV5r6" target="_blank" class="btn-apply">線上申請個人會員</a>
+            </div>
+            <div class="member-card">
+                <h3>🏢 團體會員</h3>
+                <p class="price">入會費：新臺幣 3,000 元<br>常年會費：新臺幣 15,000 元</p>
+                <a href="https://forms.gle/ueaTztoQq3WK9LL9A" target="_blank" class="btn-apply">線上申請團體會員</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        📞 電話：0910-699336 &nbsp;|&nbsp; ✉️ 信箱：<a href="mailto:service@tax.org.tw">service@tax.org.tw</a> &nbsp;|&nbsp; 🏠 官網：<a href="http://www.tax.org.tw" target="_blank">www.tax.org.tw</a><br>
+        © 台灣財務管理推廣學會 All rights reserved.
+    </footer>
+
+</body>
+</html>
